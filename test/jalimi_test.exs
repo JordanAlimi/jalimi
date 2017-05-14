@@ -1,6 +1,6 @@
-defmodule HerokuBuildpackTestTest do
+defmodule JalimiTest do
   use ExUnit.Case
-  doctest HerokuBuildpackTest
+  doctest Jalimi
 
   test "the truth" do
     assert 1 + 1 == 2

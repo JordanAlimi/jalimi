@@ -1,4 +1,4 @@
-defmodule HerokuBuildpackTest.Mixfile do
+defmodule Jalimi.Mixfile do
   use Mix.Project
 
   def project do
@@ -15,7 +15,7 @@ defmodule HerokuBuildpackTest.Mixfile do
   # Type "mix help compile.app" for more information
   def application do
     [applications: [:logger],
-     mod: {HerokuBuildpackTest, []}]
+     mod: {Jalimi, []}]
   end
 
   # Dependencies can be Hex packages:
