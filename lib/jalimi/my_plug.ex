@@ -1,25 +1,14 @@
-defmodule MyPlug do
-  import Plug.Conn
+defmodule Router do
+  import Plug.Router
 
-  def init(options) do
-    # initialize options
-
-    options
+  if Mix.env == :dev do
+    use Plug.Debugger
   end
 
-  def call(conn, _opts) do
-      route(conn.method, conn.path_info, conn)
-  end
+  plug :match
+  plug :dispatch
 
-  def route("GET", ["*"], conn) do
-    conn |> send_resp(200, "welcome to jordan alimi's site")
-  end
-
-  def route(_method, _path, conn) do
-    conn |> send_resp(200, "welcome to jalimi")
-  end
-
-  def route("GET", ["ping"], conn) do
-    conn |> send_resp(200, "pong")
+  get "/" do
+    send_resp(conn, 200, "HELLO")
   end
 end
