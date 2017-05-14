@@ -6,6 +6,6 @@ defmodule Router do
   end
 
   get "/" do
-    send_resp(conn, 200, "HELLO")
+    conn |> send_resp(conn, 200, "HELLO")
   end
 end
