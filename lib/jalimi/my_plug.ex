@@ -2,10 +2,10 @@ defmodule Router do
   import Plug.Router
 
   if Mix.env == :dev do
-    use Plug.Debugger
+    import Plug.Debugger
   end
 
   get "/" do
-    conn |> send_resp(conn, 200, "HELLO")
+    conn |> Plug.Conn.send_resp(conn, 200, "HELLO")
   end
 end
