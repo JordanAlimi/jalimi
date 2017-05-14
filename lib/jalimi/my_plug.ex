@@ -11,7 +11,7 @@ defmodule MyPlug do
       route(conn.method, conn.path_info, conn)
   end
 
-  def route("GET", ["/"], conn) do
+  def route(_method, _path, conn) do
     conn |> send_resp(200, "welcome to jalimi")
   end
 
