@@ -11,10 +11,10 @@ defmodule MyPlug do
       route(conn.method, conn.path_info, conn)
   end
 
-  def route("GET", [""], conn) do
+  def route("GET", ["/"], conn) do
     conn |> send_resp(200, "welcome to jalimi")
   end
-  
+
   def route("GET", ["ping"], conn) do
     conn |> send_resp(200, "pong")
   end
