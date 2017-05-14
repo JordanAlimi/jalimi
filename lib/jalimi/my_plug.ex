@@ -1,12 +1,12 @@
 defmodule Router do
-  import Plug.Router
+  use Plug.Router
 
   if Mix.env == :dev do
     use Plug.Debugger
   end
 
-  plug :match
-  plug :dispatch
+  Plug :match
+  Plug :dispatch
 
   get "/" do
     send_resp(conn, 200, "HELLO")
