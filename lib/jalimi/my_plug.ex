@@ -15,6 +15,7 @@ defmodule MyRouter do
   end
 
   match _ do
+    IO.puts inspect Poison
     conn
     |> put_resp_content_type("application/json")
     |> send_resp(404, Poison.encode(%{status_code: "404", message: "Page not found."}))
