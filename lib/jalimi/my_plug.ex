@@ -1,5 +1,5 @@
 defmodule MyRouter do
-  use Plug.Router
+  import Plug.Router
 
   if Mix.env == :dev do
     import Plug.Debugger
@@ -9,12 +9,14 @@ defmodule MyRouter do
   plug :dispatch
 
   get "/" do
-    put_resp_content_type(conn, "text/plain")
-    send_resp(conn, 200, "HELLO")
+    conn
+    |> put_resp_content_type("application/json")
+    |> send_resp(200, Poison.encode(%{status_code: "200", message: "You have succeeded."})
   end
 
   match _ do
-    put_resp_content_type(conn, "text/plain")
-    send_resp(conn, 404, "oops")
+    conn
+    |> put_resp_content_type("application/json")
+    |> send_resp(404, Poison.encode(%{status_code: "404", message: "Page not found."})
   end
 end
