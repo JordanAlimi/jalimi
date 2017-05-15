@@ -2,7 +2,7 @@ defmodule MyRouter do
   use Plug.Router
 
   if Mix.env == :dev do
-    import Plug.Debugger
+    use Plug.Debugger
   end
 
   plug :match
@@ -11,13 +11,12 @@ defmodule MyRouter do
   get "/" do
     conn
     |> put_resp_content_type("application/json")
-    |> send_resp(200, Poison.encode(%{status_code: "200", message: "You have succeeded."}))
+    |> send_resp(200, Poison.encode! (%{status_code: "200", message: "You have succeeded."}))
   end
 
   match _ do
-    IO.puts inspect Poison
     conn
     |> put_resp_content_type("application/json")
-    |> send_resp(404, Poison.encode(%{status_code: "404", message: "Page not found."}))
+    |> send_resp(404, Poison.encode! (%{status_code: "404", message: "Page not found."}))
   end
 end
