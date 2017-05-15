@@ -1,37 +1,46 @@
-defmodule Jalimi.Mixfile do
+defmodule BirdWatch.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :heroku_buildpack_test,
-     version: "0.0.1",
-     elixir: "~> 1.1",
-     build_embedded: Mix.env == :prod,
-     start_permanent: Mix.env == :prod,
-     deps: deps]
+    [
+      app: :bird_watch,
+      version: "0.1.0",
+      elixir: "~> 1.2",
+      elixirc_paths: elixirc_paths(Mix.env),
+      compilers: [:phoenix] ++ Mix.compilers,
+      build_embedded: Mix.env == :prod,
+      start_permanent: Mix.env == :prod,
+      deps: deps
+    ]
   end
 
-  # Configuration for the OTP application
+  # Configuration for the OTP application.
   #
-  # Type "mix help compile.app" for more information
+  # Type `mix help compile.app` for more information.
   def application do
-    [applications: [:logger],
-     mod: {Jalimi, []}]
+    [mod: {BirdWatch, []},
+     applications: [:phoenix, :phoenix_html, :cowboy, :logger,
+                    :httpoison, :couchdb_connector]]
   end
 
-  # Dependencies can be Hex packages:
+  # Specifies which paths to compile per environment.
+  defp elixirc_paths(:test), do: ["lib", "web", "test/support"]
+  defp elixirc_paths(_),     do: ["lib", "web"]
+
+  # Specifies your project dependencies.
   #
-  #   {:mydep, "~> 0.3.0"}
-  #
-  # Or git/path repositories:
-  #
-  #   {:mydep, git: "https://github.com/elixir-lang/mydep.git", tag: "0.1.0"}
-  #
-  # Type "mix help deps" for more examples and options
+  # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:cowboy, "~> 1.0.0"},
-      {:plug, "~> 1.0"},
-      {:poison, "~> 3.1.0"}
+      {:phoenix, "~> 1.2.0"},
+      {:phoenix_html, "~> 2.6"},
+      {:phoenix_live_reload, "~> 1.0", only: :dev},
+      {:cowboy, "~> 1.0"},
+      {:httpoison, "~> 0.11"},
+      {:coverex, "~> 1.4.7", only: [:dev, :test]},
+      {:poison, "~> 1.5"},
+      {:couchdb_connector, "~> 0.5"},
+      {:credo, "~> 0.2", only: [:dev, :test]}
     ]
   end
 end
