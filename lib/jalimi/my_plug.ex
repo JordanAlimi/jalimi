@@ -1,5 +1,5 @@
 defmodule MyRouter do
-  import Plug.Router
+  use Plug.Router
 
   if Mix.env == :dev do
     import Plug.Debugger
